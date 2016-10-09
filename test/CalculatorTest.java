@@ -24,10 +24,10 @@ public class CalculatorTest {
 	
 	@Test
 	public void multiTest() {
-		
 		assertEquals("3 * 4 = 12", 12, calc.multi(3, 4));
 		assertEquals("23 * 3 = 69", 69, calc.multi(23, 3));
 		assertEquals("6 * 10 = 60", 60, calc.multi(6, 10));
+		assertEquals("3 / 0 = No ArthimeticException", 0, calc.div(3, 0));
 	}
 	
 	@Test
@@ -46,8 +46,8 @@ public class CalculatorTest {
 		assertEquals("21 > 17 = true", true, calc.greater(21, 17));
 	}
 	
-	@Test(expected=ArithmeticException.class)
+	@Test
 	public void divArthExcTest() {
-		assertEquals("3 / 0", 0, calc.div(3, 0));
+		assertEquals("3 / 0 = No ArthimeticException", 0, calc.div(3, 0));
 	}
 }
