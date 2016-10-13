@@ -1,10 +1,14 @@
-import org.atheby.tau.lab1.Calculator;
-import static org.junit.Assert.assertEquals;
+package main.java.org.atheby.tau.lab1;
+
 import org.junit.*;
+import org.junit.rules.ExpectedException;
+import static org.junit.Assert.*;
 
 public class CalculatorTest {
 	
-	public Calculator calc = new Calculator();
+	private Calculator calc = new Calculator();
+	
+	@Rule public ExpectedException exception = ExpectedException.none();
 	
 	@Test
 	public void addTest() {
@@ -27,7 +31,6 @@ public class CalculatorTest {
 		assertEquals("3 * 4 = 12", 12, calc.multi(3, 4));
 		assertEquals("23 * 3 = 69", 69, calc.multi(23, 3));
 		assertEquals("6 * 10 = 60", 60, calc.multi(6, 10));
-		assertEquals("3 / 0 = No ArthimeticException", 0, calc.div(3, 0));
 	}
 	
 	@Test
@@ -41,13 +44,13 @@ public class CalculatorTest {
 	@Test
 	public void greaterTest() {
 		
-		assertEquals("5 > 3 = true", true, calc.greater(5, 3));
-		assertEquals("11 > 20 = false", false, calc.greater(11, 20));
-		assertEquals("21 > 17 = true", true, calc.greater(21, 17));
+		assertTrue("Should be true", calc.greater(10, 5));
+		assertFalse("Should be false", calc.greater(5, 10));
 	}
 	
 	@Test
-	public void divArthExcTest() {
-		assertEquals("3 / 0 = No ArthimeticException", 0, calc.div(3, 0));
+	public void divArithExcTest() throws ArithmeticException {
+		exception.expect(ArithmeticException.class);
+		calc.div(6, 0);
 	}
 }

@@ -1,4 +1,4 @@
-package org.atheby.tau.lab1;
+package main.java.org.atheby.tau.lab1;
 
 public class CalculatorDouble {
 	

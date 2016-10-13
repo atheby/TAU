@@ -5,3 +5,4 @@ lib/
 .classpath
 .project
 .*~
+/target/

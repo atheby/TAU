@@ -1,10 +1,11 @@
-import org.atheby.tau.lab1.CalculatorDouble;
-import static org.junit.Assert.assertEquals;
+package main.java.org.atheby.tau.lab1;
+
 import org.junit.*;
+import static org.junit.Assert.*;
 
 public class CalculatorDoubleTest {
 	
-	public CalculatorDouble calc = new CalculatorDouble();
+	private CalculatorDouble calc = new CalculatorDouble();
 	private static final double DELTA = 0.000000001;
 	
 	@Test
@@ -38,7 +39,7 @@ public class CalculatorDoubleTest {
 	@Test
 	public void greaterTest() {
 		
-		assertEquals("66.311356517 > 66.43434333 = false", false, calc.greater(66.311356517, 66.43434333));
-		assertEquals("1.23213 > 0.3213212 = true", true, calc.greater(1.23213, 0.3213212));
+		assertFalse("Should be false", calc.greater(66.311356517, 66.43434333));
+		assertTrue("Should be true", calc.greater(1.23213, 0.3213212));
 	}
 }
