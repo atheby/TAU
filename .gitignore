@@ -1,8 +1,10 @@
 bin/
 lib/
+.idea/
 .settings/
 
 .classpath
 .project
+*.iml
 .*~
 /target/

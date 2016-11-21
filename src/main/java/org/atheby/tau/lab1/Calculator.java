@@ -1,4 +1,4 @@
-package main.java.org.atheby.tau.lab1;
+package org.atheby.tau.lab1;
 
 public class Calculator {
 	
@@ -15,10 +15,7 @@ public class Calculator {
 	}
 	
 	public int div(int a, int b) {
-		try {
 			return a / b;
-		} catch (Exception ArithmeticException) {};
-		return 0;
 	}
 	
 	public boolean greater(int a, int b) {

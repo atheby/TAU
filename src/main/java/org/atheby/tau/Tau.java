@@ -1,9 +1,7 @@
-package main.java.org.atheby.tau;
+package org.atheby.tau;
 
 public class Tau {
 
-	public static void main(String[] args) {
-
-	}
+	public static void main(String[] args) {}
 
 }

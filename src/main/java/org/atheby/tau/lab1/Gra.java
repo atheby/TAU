@@ -1,4 +1,4 @@
-package main.java.org.atheby.tau.lab1;
+package org.atheby.tau.lab1;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -13,7 +13,6 @@ public class Gra implements Psikus {
 			sign = true;
 		liczba = Math.abs(liczba);
 		String[] arr = liczba.toString().split("");
-		String temp = "";
 		StringBuilder sb = new StringBuilder();
 		int pos = getRandom(0, arr.length - 1);
 		for(int x = 0; x < arr.length; x++)
@@ -21,8 +20,11 @@ public class Gra implements Psikus {
 				continue;
 			else
 				sb.append(arr[x]);
-		if(sign)
-			return Math.negateExact(Integer.parseInt(sb.toString()));
+		if(sign) {
+			int tmp = Integer.parseInt(sb.toString());
+			tmp = -tmp;
+			return tmp;
+		}
 		return Integer.parseInt(sb.toString());
 	}
 
@@ -45,8 +47,11 @@ public class Gra implements Psikus {
 		StringBuilder sb = new StringBuilder();
 		for(int x = 0; x < arr.length; x++)
 			sb.append(arr[x]);
-		if(sign)
-			return Math.negateExact(Integer.parseInt(sb.toString()));
+		if(sign) {
+			int tmp = Integer.parseInt(sb.toString());
+			tmp = -tmp;
+			return tmp;
+		}
 		return Integer.parseInt(sb.toString());
 	}
 
