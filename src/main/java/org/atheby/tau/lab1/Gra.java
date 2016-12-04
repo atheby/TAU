@@ -14,8 +14,8 @@ public class Gra implements Psikus {
 		liczba = Math.abs(liczba);
 		String[] arr = liczba.toString().split("");
 		StringBuilder sb = new StringBuilder();
-		int pos = getRandom(0, arr.length - 1);
-		for(int x = 0; x < arr.length; x++)
+		int pos = getRandom(1, arr.length - 1);
+		for(int x = 1; x < arr.length; x++)
 			if(x == pos)
 				continue;
 			else
@@ -38,8 +38,8 @@ public class Gra implements Psikus {
 		String[] arr = liczba.toString().split("");
 		int firstPos, secondPos;
 		do {
-			firstPos = getRandom(0, arr.length - 1);
-			secondPos = getRandom(0, arr.length - 1);
+			firstPos = getRandom(1, arr.length - 1);
+			secondPos = getRandom(1, arr.length - 1);
 		} while (firstPos == secondPos);
 		String temp = arr[firstPos];
 		arr[firstPos] = arr[secondPos];
