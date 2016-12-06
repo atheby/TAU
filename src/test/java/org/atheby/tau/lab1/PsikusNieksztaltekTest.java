@@ -26,8 +26,10 @@ public class PsikusNieksztaltekTest {
 	public static Collection data() {
 		return Arrays.asList(new Object[][] {
 			{ new Gra(), 125, is(125) },
+			{ new Gra(), -125, is(-125) },
 			{ new Gra(), 334, anyOf(equalTo(834), equalTo(384)) },
-			{ new Gra(), 376, anyOf(equalTo(876), equalTo(316), equalTo(379)) }
+			{ new Gra(), 376, anyOf(equalTo(876), equalTo(316), equalTo(379)) },
+			{ new Gra(), 333, anyOf(equalTo(833), equalTo(383), equalTo(338)) }
 		});
 	}
 	

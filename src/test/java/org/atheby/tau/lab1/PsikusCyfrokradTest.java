@@ -24,8 +24,11 @@ public class PsikusCyfrokradTest {
 	@Parameterized.Parameters
 	public static Collection data() {
 		return Arrays.asList(new Object[][] {
+			{ new Gra(), 0, is(nullValue()) },
 			{ new Gra(), 3, is(nullValue()) },
 			{ new Gra(), -6, is(nullValue()) },
+			{ new Gra(), 11, is(1) },
+			{ new Gra(), -11, is(-1) },
 			{ new Gra(), 354, anyOf(equalTo(54), equalTo(34), equalTo(35)) },
 			{ new Gra(), -354, anyOf(equalTo(-54), equalTo(-34), equalTo(-35)) },
 			{ new Gra(), 7897, anyOf(equalTo(897), equalTo(797), equalTo(787), equalTo(789)) }

@@ -62,11 +62,11 @@ public class GraSteps {
         assertThat(gra.nieksztaltek(getNumber()), Matchers.is(result));
     }
 
-    public int getNumber() {
+    private int getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    private void setNumber(int number) {
         this.number = number;
     }
 }

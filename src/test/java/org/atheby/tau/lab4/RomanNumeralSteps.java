@@ -2,6 +2,8 @@ package org.atheby.tau.lab4;
 
 import org.atheby.tau.lab1.RomanNumeral;
 import org.jbehave.core.annotations.*;
+import org.jbehave.core.model.ExamplesTable;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,17 +11,16 @@ public class RomanNumeralSteps {
 
     private RomanNumeral rn;
 
-    @Given("roman numeral")
-    public void setup() {
-    }
+    @Given("arabic number")
+    public void setup() {}
 
-    @When("number is positive and equals $number")
-    public void setNumber(int number) {
-        rn = new RomanNumeral(number);
-    }
-
-    @Then("output should be $result")
-    public void output(String $result) {
-        assertEquals($result, rn.toString());
+    @Then("roman number should be: $numbers")
+    public void output(ExamplesTable numbers) {
+        for (Map<String, String> row : numbers.getRows()) {
+            Integer arabic = Integer.parseInt(row.get("arabic"));
+            String roman = row.get("roman");
+            rn = new RomanNumeral(arabic);
+            assertEquals(roman, rn.toString());
+        }
     }
 }

@@ -11,21 +11,13 @@ public class Gra implements Psikus {
 		boolean sign = false;
 		if(liczba < -9)
 			sign = true;
-		liczba = Math.abs(liczba);
-		String[] arr = liczba.toString().split("");
-		StringBuilder sb = new StringBuilder();
-		int pos = getRandom(1, arr.length - 1);
-		for(int x = 1; x < arr.length; x++)
-			if(x == pos)
-				continue;
-			else
-				sb.append(arr[x]);
-		if(sign) {
-			int tmp = Integer.parseInt(sb.toString());
-			tmp = -tmp;
-			return tmp;
-		}
-		return Integer.parseInt(sb.toString());
+		List<String> strNumber = getList(Math.abs(liczba));
+		int pos = getRandom(0, strNumber.size() - 1);
+		strNumber.remove(pos);
+		liczba = getNumberFromList(strNumber);
+		if(sign)
+			liczba = -liczba;
+		return liczba;
 	}
 
 	public Integer hultajchochla(Integer liczba) throws NieduanyPsikusException {
@@ -34,52 +26,76 @@ public class Gra implements Psikus {
 		boolean sign = false;
 		if(liczba < -9)
 			sign = true;
-		liczba = Math.abs(liczba);
-		String[] arr = liczba.toString().split("");
+		List<String> strNumber = getList(Math.abs(liczba));
 		int firstPos, secondPos;
+		firstPos = getRandom(0, strNumber.size() - 1);
 		do {
-			firstPos = getRandom(1, arr.length - 1);
-			secondPos = getRandom(1, arr.length - 1);
+			secondPos = getRandom(0, strNumber.size() - 1);
 		} while (firstPos == secondPos);
-		String temp = arr[firstPos];
-		arr[firstPos] = arr[secondPos];
-		arr[secondPos] = temp;
-		StringBuilder sb = new StringBuilder();
-		for(int x = 0; x < arr.length; x++)
-			sb.append(arr[x]);
-		if(sign) {
-			int tmp = Integer.parseInt(sb.toString());
-			tmp = -tmp;
-			return tmp;
-		}
-		return Integer.parseInt(sb.toString());
+		String temp = strNumber.get(firstPos);
+		strNumber.set(firstPos, strNumber.get(secondPos));
+		strNumber.set(secondPos, temp);
+		liczba = getNumberFromList(strNumber);
+		if(sign)
+			liczba = -liczba;
+		return liczba;
 	}
 
 	public Integer nieksztaltek(Integer liczba) {
-		List<Integer> positions = new ArrayList<Integer>();
-		StringBuilder sb = new StringBuilder(liczba.toString());
-		for(int x = 0; x < sb.length(); x++)
-			positions.add(x);
-		int randomPos;
+		boolean sign = false;
+		if(liczba < 0)
+			sign = true;
+		List<String> strNumber = getList(Math.abs(liczba));
+
+		boolean isNumberFromPattern = false;
+		for(int x = 0; x < strNumber.size(); x++) {
+			String s = strNumber.get(x);
+			if(s.equals("3") || s.equals("7") || s.equals("6"))
+				isNumberFromPattern = true;
+		}
+
+		if(!isNumberFromPattern)
+			return liczba;
+
+		boolean isSwitched = false;
 		do {
-			randomPos = positions.remove(getRandom(0, positions.size() - 1));
-			if(sb.substring(randomPos, randomPos + 1).equals("3")) {
-				sb.setCharAt(randomPos, '8');
-				break;
+			int pos = getRandom(0, strNumber.size() - 1);
+			if(strNumber.get(pos).equals("3")) {
+				strNumber.set(pos, "8");
+				isSwitched = true;
 			}
-			if(sb.substring(randomPos, randomPos + 1).equals("7")) {
-				sb.setCharAt(randomPos, '1');
-				break;
+			if(strNumber.get(pos).equals("7")) {
+				strNumber.set(pos, "1");
+				isSwitched = true;
 			}
-			if(sb.substring(randomPos, randomPos + 1).equals("6")) {
-				sb.setCharAt(randomPos, '9');
-				break;
+			if(strNumber.get(pos).equals("6")) {
+				strNumber.set(pos, "9");
+				isSwitched = true;
 			}
-		} while(positions.size() > 0);
-		return Integer.parseInt(sb.toString());
+		} while(!isSwitched);
+		liczba = getNumberFromList(strNumber);
+		if(sign)
+			liczba = -liczba;
+		return liczba;
 	}
 
 	private int getRandom(int min, int max) {
 		return ThreadLocalRandom.current().nextInt(min, max + 1);
+	}
+	
+	private List<String> getList(Integer number) {
+		List<String> numberList = new ArrayList<>();
+		String strNumber = number.toString();
+		
+		for(int x = 0; x < strNumber.length(); x++)
+			numberList.add(strNumber.substring(x, x + 1));
+		return numberList;
+	}
+
+	private Integer getNumberFromList(List<String> list) {
+		StringBuilder sb = new StringBuilder();
+		for(int x = 0; x < list.size(); x++)
+			sb.append(list.get(x));
+		return Integer.parseInt(sb.toString());
 	}
 }
