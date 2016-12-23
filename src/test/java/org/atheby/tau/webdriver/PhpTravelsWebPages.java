@@ -3,13 +3,13 @@ package org.atheby.tau.webdriver;
 import org.atheby.tau.webdriver.pages.phptravels.*;
 import org.jbehave.web.selenium.*;
 
-public class Pages {
+public class PhpTravelsWebPages {
 
     private final WebDriverProvider driverProvider;
     private Home home;
     private Login login;
 
-    public Pages(WebDriverProvider driverProvider) {
+    public PhpTravelsWebPages(WebDriverProvider driverProvider) {
         this.driverProvider = driverProvider;
     }
 

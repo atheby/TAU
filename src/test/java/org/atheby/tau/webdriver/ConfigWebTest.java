@@ -15,19 +15,19 @@ import org.openqa.selenium.chrome.*;
 import static java.util.Arrays.asList;
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 
-public class InitWebTest extends JUnitStories {
+public class ConfigWebTest extends JUnitStories {
 
     // Driver config
     private WebDriverProvider driverProvider = new TypeWebDriverProvider(ChromeDriver.class);
     private static final String DRIVERKEY = "webdriver.chrome.driver";
-    private static final String DRIVERVALUE = "/home/marek/Desktop/chromedriver"; //driver path
+    private static final String DRIVERVALUE = ""; //driver path
 
     private WebDriverSteps lifecycleSteps = new PerStoriesWebDriverSteps(driverProvider);
-    private Pages pages = new Pages(driverProvider);
+    private PhpTravelsWebPages phpTravelsWebPages = new PhpTravelsWebPages(driverProvider);
     private SeleniumContext context = new SeleniumContext();
     private ContextView contextView = new LocalFrameContextView().sized(500, 100);
 
-    public InitWebTest() {
+    public ConfigWebTest() {
         System.setProperty(DRIVERKEY, DRIVERVALUE);
         if (lifecycleSteps instanceof PerStoriesWebDriverSteps)
             configuredEmbedder().useExecutorService(MoreExecutors.sameThreadExecutor());
@@ -51,7 +51,7 @@ public class InitWebTest extends JUnitStories {
     public InjectableStepsFactory stepsFactory() {
         Configuration configuration = configuration();
         return new InstanceStepsFactory(configuration,
-                new PhpTravelsWebSteps(pages),
+                new PhpTravelsWebSteps(phpTravelsWebPages),
                 lifecycleSteps,
                 new WebDriverScreenshotOnFailure(driverProvider, configuration.storyReporterBuilder()));
     }
