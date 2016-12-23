@@ -10,8 +10,8 @@ public class Home extends WebDriverPage {
         super(driverProvider);
     }
 
-    public void open() {
-        get("http://google.com");
+    public void open(String url) {
+        get(url);
         manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 

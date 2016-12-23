@@ -13,9 +13,9 @@ public class InitWebSteps {
         this.pages = pages;
     }
 
-    @Given("user is on Home page")
-    public void userIsOnHomePage(){
-        pages.home().open();
+    @Given("user opens $url")
+    public void userIsOnHomePage(String url){
+        pages.home().open(url);
     }
 
     @When("title is $title")

@@ -20,7 +20,7 @@ public class InitWebTest extends JUnitStories {
     // Driver config
     private WebDriverProvider driverProvider = new TypeWebDriverProvider(ChromeDriver.class);
     private static final String DRIVERKEY = "webdriver.chrome.driver";
-    private static final String DRIVERVALUE = ""; //driver path
+    private static final String DRIVERVALUE = "/home/marek/Desktop/chromedriver"; //driver path
 
     private WebDriverSteps lifecycleSteps = new PerStoriesWebDriverSteps(driverProvider);
     private Pages pages = new Pages(driverProvider);
@@ -51,7 +51,7 @@ public class InitWebTest extends JUnitStories {
     public InjectableStepsFactory stepsFactory() {
         Configuration configuration = configuration();
         return new InstanceStepsFactory(configuration,
-                new InitWebSteps(pages),
+                new PhpTravelsWebSteps(pages),
                 lifecycleSteps,
                 new WebDriverScreenshotOnFailure(driverProvider, configuration.storyReporterBuilder()));
     }
