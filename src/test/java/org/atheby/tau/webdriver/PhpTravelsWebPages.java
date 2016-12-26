@@ -8,6 +8,7 @@ public class PhpTravelsWebPages {
     private final WebDriverProvider driverProvider;
     private Home home;
     private Login login;
+    private Flights flights;
 
     public PhpTravelsWebPages(WebDriverProvider driverProvider) {
         this.driverProvider = driverProvider;
@@ -25,5 +26,12 @@ public class PhpTravelsWebPages {
             login = new Login(driverProvider);
         }
         return login;
+    }
+
+    public Flights flights(){
+        if ( flights == null ){
+            flights = new Flights(driverProvider);
+        }
+        return flights;
     }
 }

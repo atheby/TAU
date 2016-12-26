@@ -11,9 +11,8 @@ import org.jbehave.core.steps.*;
 import org.jbehave.web.selenium.*;
 import com.google.common.util.concurrent.*;
 import org.openqa.selenium.chrome.*;
-
-import static java.util.Arrays.asList;
-import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
+import static java.util.Arrays.*;
+import static org.jbehave.core.io.CodeLocations.*;
 
 public class ConfigWebTest extends JUnitStories {
 
