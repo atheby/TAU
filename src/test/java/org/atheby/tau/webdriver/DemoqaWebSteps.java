@@ -40,6 +40,7 @@ public class DemoqaWebSteps {
 
     @Then("drag and drop an element")
     public void performDnD() {
-        demoqaWebPages.droppable().dragAndDrop();
+        String result = demoqaWebPages.droppable().dragAndDrop();
+        assertThat(result, is("Dropped!"));
     }
 }

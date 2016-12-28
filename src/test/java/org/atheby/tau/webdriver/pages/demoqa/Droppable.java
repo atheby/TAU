@@ -11,7 +11,7 @@ public class Droppable extends BasePage {
         super(driverProvider);
     }
 
-    public void dragAndDrop() {
+    public String dragAndDrop() {
         Actions builder = new Actions(getDriverProvider().get());
         WebElement draggable = findElement(By.id("draggableview"));
         WebElement droppable = findElement(By.id("droppableview"));
@@ -21,5 +21,7 @@ public class Droppable extends BasePage {
                 .release()
                 .build()
                 .perform();
+
+        return droppable.getText();
     }
 }

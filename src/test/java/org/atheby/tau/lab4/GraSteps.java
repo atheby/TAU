@@ -25,7 +25,7 @@ public class GraSteps {
         assertThat(gra.cyfrokrad(getNumber()), Matchers.anyOf(Matchers.is(a), Matchers.is(b), Matchers.is(c)));
     }
 
-    @When("user enters single digit like $single")
+    @When("single digit is entered like $single")
     public void single(int single) {
         setNumber(single);
     }
@@ -35,7 +35,7 @@ public class GraSteps {
         assertThat(gra.cyfrokrad(getNumber()), Matchers.is(Matchers.nullValue()));
     }
 
-    @When("user enters number like $number")
+    @When("number is entered like $number")
     public void digitsToShift(int number) {
         setNumber(number);
     }
@@ -47,7 +47,7 @@ public class GraSteps {
         } catch(NieduanyPsikusException e) {}
     }
 
-    @When("user enters number where one of the digit is present like $number")
+    @When("someone enters number where one of the digit is present like $number")
     public void digitFromPattern(int number) {
         setNumber(number);
     }
