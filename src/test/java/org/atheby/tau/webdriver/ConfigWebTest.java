@@ -23,6 +23,7 @@ public class ConfigWebTest extends JUnitStories {
 
     private WebDriverSteps lifecycleSteps = new PerStoriesWebDriverSteps(driverProvider);
     private PhpTravelsWebPages phpTravelsWebPages = new PhpTravelsWebPages(driverProvider);
+    private DemoqaWebPages demoqaWebPages = new DemoqaWebPages(driverProvider);
     private SeleniumContext context = new SeleniumContext();
     private ContextView contextView = new LocalFrameContextView().sized(500, 100);
 
@@ -51,6 +52,7 @@ public class ConfigWebTest extends JUnitStories {
         Configuration configuration = configuration();
         return new InstanceStepsFactory(configuration,
                 new PhpTravelsWebSteps(phpTravelsWebPages),
+                new DemoqaWebSteps(demoqaWebPages),
                 lifecycleSteps,
                 new WebDriverScreenshotOnFailure(driverProvider, configuration.storyReporterBuilder()));
     }
