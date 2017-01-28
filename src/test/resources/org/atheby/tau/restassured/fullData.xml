@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <BLOG ID="0" TITLE="Blog 1"/>
+  <BLOG ID="1" TITLE="Blog 2"/>
+  <BLOG ID="2" TITLE="Blog 3"/>
+  <POST ID="0" BLOGID="0" TITLE="Post 1" TEXT="Lorem ipsum"/>
+  <POST ID="1" BLOGID="1" TITLE="Post 2" TEXT="Lorem ipsum"/>
+  <POST ID="2" BLOGID="1" TITLE="Post 3" TEXT="Lorem ipsum"/>
+  <POST ID="3" BLOGID="2" TITLE="Post 4" TEXT="Lorem ipsum"/>
+  <POST ID="4" BLOGID="2" TITLE="Post 5" TEXT="Lorem ipsum"/>
+  <POST ID="5" BLOGID="2" TITLE="Post 6" TEXT="Lorem ipsum"/>
+  <COMMENT ID="0" POSTID="0" AUTHOR="Author 1" TEXT="Lorem ipsum"/>
+  <COMMENT ID="1" POSTID="0" AUTHOR="Author 2" TEXT="Lorem ipsum"/>
+  <COMMENT ID="2" POSTID="1" AUTHOR="Author 1" TEXT="Lorem ipsum"/>
+  <COMMENT ID="3" POSTID="3" AUTHOR="Author 3" TEXT="Lorem ipsum"/>
+  <COMMENT ID="4" POSTID="5" AUTHOR="Author 3" TEXT="Lorem ipsum"/>
+</dataset>
