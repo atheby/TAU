@@ -16,6 +16,9 @@ public class CommentManager {
 	private PreparedStatement getCommentStmt;
 	private PreparedStatement getAllCommentsStmt;
 	private PreparedStatement getAllCommentsByPostIdStmt;
+	private PreparedStatement updateCommentStmt;
+	private PreparedStatement deleteCommentStmt;
+	private PreparedStatement deleteAllCommentsStmt;
 	private PreparedStatement deleteAllCommentsByPostIdStmt;
 
 	private Statement statement;
@@ -41,14 +44,13 @@ public class CommentManager {
 			getCommentStmt = connection.prepareStatement("SELECT * FROM comment WHERE id = ?");
 			getAllCommentsStmt = connection.prepareStatement("SELECT * FROM comment");
 			getAllCommentsByPostIdStmt = connection.prepareStatement("SELECT * FROM comment WHERE postId = ?");
+			updateCommentStmt = connection.prepareStatement("UPDATE comment SET author = ?, text = ? WHERE id = ?");
+			deleteCommentStmt = connection.prepareStatement("DELETE FROM comment WHERE id = ?");
+			deleteAllCommentsStmt = connection.prepareStatement("DELETE from comment");
 			deleteAllCommentsByPostIdStmt = connection.prepareStatement("DELETE FROM comment WHERE postId = ?");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	Connection getConnection() {
-		return connection;
 	}
 
 	public int addComment(Comment comment) {
@@ -126,6 +128,38 @@ public class CommentManager {
 			e.printStackTrace();
 		}
 		return c;
+	}
+
+	public int updateComment(Comment comment) {
+		int count = 0;
+		try {
+			updateCommentStmt.setString(1, comment.getAuthor());
+			updateCommentStmt.setString(2, comment.getText());
+			updateCommentStmt.setLong(3, comment.getId());
+
+			count = updateCommentStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	public void deleteComment(Long id) {
+		try {
+			deleteCommentStmt.setLong(1, id);
+			deleteCommentStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void deleteAllComments() {
+		try {
+			deleteAllCommentsStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void deleteCommentsByPost(Long id) {

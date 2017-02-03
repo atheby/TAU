@@ -15,6 +15,7 @@ public class BlogManager {
 	private PreparedStatement addBlogStmt;
 	private PreparedStatement getBlogStmt;
 	private PreparedStatement getAllBlogsStmt;
+	private PreparedStatement updateBlogStmt;
 	private PreparedStatement deleteBlogStmt;
 	private PreparedStatement deleteAllBlogsStmt;
 
@@ -41,20 +42,9 @@ public class BlogManager {
 			addBlogStmt = connection.prepareStatement("INSERT INTO blog (title) VALUES (?)");
 			getBlogStmt = connection.prepareStatement("SELECT * FROM blog WHERE id = ?");
 			getAllBlogsStmt = connection.prepareStatement("SELECT * FROM blog");
+			updateBlogStmt = connection.prepareStatement("UPDATE blog SET title = ? WHERE id = ?");
 			deleteBlogStmt = connection.prepareStatement("DELETE FROM blog WHERE id = ?");
 			deleteAllBlogsStmt = connection.prepareStatement("DELETE FROM blog");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	Connection getConnection() {
-		return connection;
-	}
-
-	void deleteAllBlogs() {
-		try {
-			deleteAllBlogsStmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -111,6 +101,20 @@ public class BlogManager {
 		return b;
 	}
 
+	public int updateBlog(Blog blog) {
+		int count = 0;
+		try {
+			updateBlogStmt.setString(1, blog.getTitle());
+			updateBlogStmt.setLong(2, blog.getId());
+
+			count = updateBlogStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 	public void deleteBlog(Long id) {
 		pm = new PostManager();
 
@@ -118,6 +122,16 @@ public class BlogManager {
 			pm.deletePostsByBlog(id);
 			deleteBlogStmt.setLong(1, id);
 			deleteBlogStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void deleteAllBlogs() {
+		pm = new PostManager();
+		try {
+			pm.deleteAllPosts();
+			deleteAllBlogsStmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

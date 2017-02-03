@@ -12,9 +12,6 @@ public class MainRestService {
     @GET
     @Produces("text/html")
     public String main(){
-        new BlogManager();
-        new PostManager();
-        new CommentManager();
         return "REST Assured - DB Unit";
     }
 }

@@ -20,13 +20,6 @@ public class BlogRestService {
         return blogs;
     }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addBlog(Blog blog){
-        bm.addBlog(blog);
-        return Response.status(201).entity(blog).build();
-    }
-
     @GET
     @Path("/{blogId}")
     @Produces("application/json")
@@ -35,10 +28,31 @@ public class BlogRestService {
         return b;
     }
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addBlog(Blog blog){
+        bm.addBlog(blog);
+        return Response.status(201).entity(blog).build();
+    }
+
+    @PUT
+    @Path("/{blogId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateBlog(Blog blog){
+        bm.updateBlog(blog);
+        return Response.status(201).entity(blog).build();
+    }
+
     @DELETE
     @Path("/{blogId}")
     public Response deleteBlog(@PathParam("blogId") Long id){
         bm.deleteBlog(id);
+        return Response.status(204).build();
+    }
+
+    @DELETE
+    public Response deleteAllBlogs(){
+        bm.deleteAllBlogs();
         return Response.status(204).build();
     }
 }

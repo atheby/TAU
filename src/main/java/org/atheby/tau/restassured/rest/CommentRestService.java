@@ -20,6 +20,22 @@ public class CommentRestService {
         return comments;
     }
 
+    @GET
+    @Path("/{commentId}")
+    @Produces("application/json")
+    public Comment getComment(@PathParam("commentId") Long id){
+        Comment c = cm.getComment(id);
+        return c;
+    }
+
+    @GET
+    @Path("/post/{postId}")
+    @Produces("application/json")
+    public List<Comment> getAllCommentsByPost(@PathParam("postId") Long id){
+        List<Comment> comments = cm.getAllCommentsByPost(id);
+        return comments;
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addComment(Comment comment){
@@ -27,11 +43,31 @@ public class CommentRestService {
         return Response.status(201).entity(comment).build();
     }
 
-    @GET
+    @PUT
     @Path("/{commentId}")
-    @Produces("application/json")
-    public Comment getComment(@PathParam("commentId") Long id){
-        Comment c = cm.getComment(id);
-        return c;
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateComment(Comment comment){
+        cm.updateComment(comment);
+        return Response.status(201).entity(comment).build();
+    }
+
+    @DELETE
+    public Response deleteAllComments(){
+        cm.deleteAllComments();
+        return Response.status(204).build();
+    }
+
+    @DELETE
+    @Path("/{commentId}")
+    public Response deleteComment(@PathParam("commentId") Long id){
+        cm.deleteComment(id);
+        return Response.status(204).build();
+    }
+
+    @DELETE
+    @Path("/post/{postId}")
+    public Response deleteCommentsByPost(@PathParam("postId") Long id){
+        cm.deleteCommentsByPost(id);
+        return Response.status(204).build();
     }
 }

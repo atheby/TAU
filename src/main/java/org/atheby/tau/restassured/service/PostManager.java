@@ -16,6 +16,9 @@ public class PostManager {
 	private PreparedStatement getPostStmt;
 	private PreparedStatement getAllPostsStmt;
 	private PreparedStatement getAllPostsByBlogIdStmt;
+	private PreparedStatement updatePostStmt;
+	private PreparedStatement deletePostStmt;
+	private PreparedStatement deleteAllPostsStmt;
 	private PreparedStatement deleteAllPostsByBlogIdStmt;
 
 	private Statement statement;
@@ -43,14 +46,13 @@ public class PostManager {
 			getPostStmt = connection.prepareStatement("SELECT * FROM post WHERE id = ?");
 			getAllPostsStmt = connection.prepareStatement("SELECT * FROM post");
 			getAllPostsByBlogIdStmt = connection.prepareStatement("SELECT * FROM post WHERE blogId = ?");
+			updatePostStmt = connection.prepareStatement("UPDATE post SET title = ?, text = ? WHERE id = ?");
+			deletePostStmt = connection.prepareStatement("DELETE FROM post WHERE id = ?");
+			deleteAllPostsStmt = connection.prepareStatement("DELETE FROM post");
 			deleteAllPostsByBlogIdStmt = connection.prepareStatement("DELETE FROM post WHERE blogId = ?");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	Connection getConnection() {
-		return connection;
 	}
 
 	public int addPost(Post post) {
@@ -134,6 +136,43 @@ public class PostManager {
 			e.printStackTrace();
 		}
 		return p;
+	}
+
+	public int updatePost(Post post) {
+		int count = 0;
+		try {
+			updatePostStmt.setString(1, post.getTitle());
+			updatePostStmt.setString(2, post.getText());
+			updatePostStmt.setLong(3, post.getId());
+
+			count = updatePostStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	public void deletePost(Long id) {
+		cm = new CommentManager();
+
+		try {
+			cm.deleteCommentsByPost(id);
+			deletePostStmt.setLong(1, id);
+			deletePostStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void deleteAllPosts() {
+		cm = new CommentManager();
+		try {
+			cm.deleteAllComments();
+			deleteAllPostsStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void deletePostsByBlog(Long id) {

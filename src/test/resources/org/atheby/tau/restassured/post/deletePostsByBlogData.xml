@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <POST TITLE="Post 1" TEXT="Lorem ipsum"/>
+  <POST TITLE="Post 4" TEXT="Lorem ipsum"/>
+  <POST TITLE="Post 5" TEXT="Lorem ipsum"/>
+  <POST TITLE="Post 6" TEXT="Lorem ipsum"/>
+</dataset>
